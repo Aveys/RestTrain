@@ -1,0 +1,4 @@
+Options +FollowSymlinks
+RewriteEngine On
+
+RewriteRule ^foo.html$ index.html [L]
