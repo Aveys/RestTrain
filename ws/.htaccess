@@ -1,4 +1,4 @@
 Options +FollowSymlinks
 RewriteEngine On
 
-RewriteRule ^foo.html$ index.html [L]
+RewriteRule ^(\w+)\/([A-Za-z0-9]*)$ index.php?typeSearch=$1&query=$2 [L]
