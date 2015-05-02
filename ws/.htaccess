@@ -1,4 +1,5 @@
 Options +FollowSymlinks
 RewriteEngine On
 
-RewriteRule ^(\w+)\/([A-Za-z0-9]*)$ index.php?typeSearch=$1&query=$2 [L]
+RewriteRule ^(\w+)/([A-Za-z0-9]*)$ index.php?typeSearch=$1&query=$2 [L]
+ErrorDocument 404 /ws/error.php

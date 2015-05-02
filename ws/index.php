@@ -1,8 +1,6 @@
 <?php
 header('Content-Type: application/json');
 require_once 'Gare.php';
-error_reporting(E_ALL | E_STRICT);
-ini_set('display_errors', true);
 function getListDept($query,$pdo){
     if($query==""){
         $queryF= 'select * from listGare;';
@@ -53,21 +51,34 @@ try {
 
 $typeSearch=$_GET['typeSearch'];
 $query=$_GET['query'];
-//echo "parametre recu : TypeSearch : ".$typeSearch." query:".$query."\n";
-switch($typeSearch){
-    case "dept":
-            $list=getListDept(htmlspecialchars($query),$pdo);
-            $result=json_encode($list,JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-        break;
-    case "name":
-        $list=getListName(htmlspecialchars($query),$pdo);
-        $result=json_encode($list,JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-        break;
-    case "cp":
-        $list=getListCP(htmlspecialchars($query),$pdo);
-        $result=json_encode($list,JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-        break;
-    default:
-        $result= '{ "ERREUR" : "Commande inconnue" }';
+
+if($typeSearch==""){
+    $result='{"ERREUR":"Aucune query detecté"}';
+}
+else if($typeSearch=="Error"){
+    $result='{"ERREUR":"Format d\'URL inccorect"}';
+}
+else {
+    switch ($typeSearch) {
+        case "dept":
+            $list = getListDept(htmlspecialchars($query), $pdo);
+            $result = json_encode($list, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+            break;
+        case "name":
+            $list = getListName(htmlspecialchars($query), $pdo);
+            $result = json_encode($list, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+            break;
+        case "cp":
+            $list = getListCP(htmlspecialchars($query), $pdo);
+            $result = json_encode($list, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+            break;
+        default:
+            $result = '{ "ERREUR" : "Commande inconnue" }';
+    }
+}
+//$result=str_replace("[","",$result);
+//$result=str_replace("]","",$result);
+if($result==""){
+    $result="{}";
 }
 echo $result;
