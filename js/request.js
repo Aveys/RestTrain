@@ -56,19 +56,27 @@ function clickSearchName() {
             htmlResult += "<td>" + now["region"] + "</td></tr>";
         }
         $("#tableData > tbody").append(htmlResult);
-        dataTable = $('#tableData').DataTable();
-        return obj;
     }
     else
         alert("Erreur WebService");
+    dataTable = $('#tableData').DataTable();
 }
 function clickSearchCP() {
-    dataTable.destroy();
-    $("#gareText").show();
-    var req = createRequest();
+    $("#CpInput").removeClass("has-error");
+    $("#CpInput > label").empty();
+    var regex = /^\d{5}$/;
     var searchText=$("#textCPSearch").val();
+    if(regex.exec(searchText)==null){
+        $("#CpInput").addClass("has-error");
+        $("#CpInput > label").text("Code Postal Invalide");
+        return null;
+    }
+
+    var req = createRequest();
     req.open("GET",baseURL+"cp/"+searchText,false);
     req.send();
+    $("#gareText").show();
+    dataTable.destroy();
     if(String(req.response) != "") {
 
 
@@ -91,6 +99,7 @@ function clickSearchCP() {
     }
     else
         alert("Erreur WebService");
+    dataTable = $('#tableData').DataTable();
 }
 function clickSearchDept() {
     dataTable.destroy();
@@ -116,11 +125,11 @@ function clickSearchDept() {
             htmlResult += "<td>" + now["region"] + "</td></tr>";
         }
         $("#tableData > tbody").append(htmlResult);
-        dataTable = $('#tableData').DataTable();
-        return obj;
+
     }
     else
         alert("Erreur WebService");
+    dataTable = $('#tableData').DataTable();
 }
 $("#nameSearchForm").submit(function(event){
     event.preventDefault();

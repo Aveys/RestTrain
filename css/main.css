@@ -1,5 +1,6 @@
 body {
     padding-top: 20px;
+    background-color: #F9F0EA;
 }
 
 .footer {
@@ -8,7 +9,20 @@ body {
     margin-top: 40px;
     border-top: 1px solid #eee;
 }
+#selectorList{
+    background-color: #E8E8E8;
+    border-radius: 5px;
+    box-shadow: 10px 10px 14px 0px #c0c0c0;
+    padding: 20px;
+    margin-bottom: 50px;
+}
+#DataRow{
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 10px 10px 14px 0px #c0c0c0;
+    padding: 20px;
 
+}
 /* Main marketing message and sign up button */
 .jumbotron {
     text-align: center;
@@ -20,7 +34,9 @@ body {
 }
 
 /* Customize the nav-justified links to be fill the entire space of the .navbar */
-
+.masthead{
+    margin-bottom: 20px;
+}
 .nav-justified {
     background-color: #eee;
     border: 1px solid #ccc;
