@@ -1,6 +1,13 @@
 <?php
 header('Content-Type: application/json');
 require_once 'Gare.php';
+
+$host= "localhost";
+$dbname = "webapp";
+$user = "root";
+$pwd = "root";
+
+
 function getListDept($query,$pdo){
     if($query==""){
         $queryF= 'select * from listGare;';
@@ -41,7 +48,7 @@ function getListName($query,$pdo){
     return $array;
 }
 try {
-    $pdo = new PDO('mysql:host=localhost;dbname=webapp;charset=utf8', "root", "root");
+    $pdo = new PDO('mysql:host='.$host.';dbname='.$dbname.';charset=utf8', $user, $pwd);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     //$this->pdo->beginTransaction();
 } catch (Exception $e) {

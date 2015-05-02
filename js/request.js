@@ -33,12 +33,20 @@ req.onreadystatechange = function() {
 
 };
 function clickSearchName() {
-    dataTable.destroy();
-    $("#gareText").show();
-    var req = createRequest();
+    $("#NameInput").removeClass("has-error");
+    $("#NameInput > label").empty();
+    var regex = /^[a-zA-Z]+$/;
     var searchText=$("#textNamesearch").val();
+    if(regex.exec(searchText)==null){
+        $("#NameInput").addClass("has-error");
+        $("#NameInput > label").text("Nom Invalide (A-Z uniquement)");
+        return null;
+    }
+    var req = createRequest();
     req.open("GET",baseURL+"name/"+searchText,false);
     req.send();
+    dataTable.destroy();
+    $("#gareText").show();
     if(String(req.response) != "") {
 
 
@@ -94,8 +102,6 @@ function clickSearchCP() {
             htmlResult += "<td>" + now["region"] + "</td></tr>";
         }
         $("#tableData > tbody").append(htmlResult);
-        dataTable = $('#tableData').DataTable();
-        return obj;
     }
     else
         alert("Erreur WebService");
