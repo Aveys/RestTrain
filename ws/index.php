@@ -6,7 +6,7 @@ $host= "localhost";
 $dbname = "webapp";
 $user = "root";
 $pwd = "root";
-
+error_reporting(E_ALL);
 
 function getListDept($query,$pdo){
     if($query==""){
@@ -85,7 +85,7 @@ else {
 }
 //$result=str_replace("[","",$result);
 //$result=str_replace("]","",$result);
-if($result==""){
+if($result=="" || is_null($result)){
     $result="{}";
 }
 echo $result;

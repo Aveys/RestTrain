@@ -45,11 +45,8 @@ function clickSearchName() {
     var req = createRequest();
     req.open("GET",baseURL+"name/"+searchText,false);
     req.send();
-    dataTable.destroy();
     $("#gareText").show();
     if(String(req.response) != "") {
-
-
         var obj = JSON.parse(String(req.response));
         $("#tableData > tbody").empty();
         var htmlResult = "";
@@ -84,7 +81,6 @@ function clickSearchCP() {
     req.open("GET",baseURL+"cp/"+searchText,false);
     req.send();
     $("#gareText").show();
-    dataTable.destroy();
     if(String(req.response) != "") {
 
 
@@ -108,7 +104,6 @@ function clickSearchCP() {
     dataTable = $('#tableData').DataTable();
 }
 function clickSearchDept() {
-    dataTable.destroy();
     $("#gareText").show();
     var req = createRequest();
     var searchText=$('#departement option:selected').val()
@@ -149,4 +144,4 @@ $("#deptSearchForm").submit(function(event){
     event.preventDefault();
     clickSearchDept();
 });
- var dataTable = $('#tableData').DataTable();
+var dataTable = $('#tableData').DataTable();
