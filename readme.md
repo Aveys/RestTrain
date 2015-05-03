@@ -44,4 +44,4 @@ Webservice REST pour lister les gares de voyageurs en France.
 
 Bug connus
 -------------
-* Quand il n'y a aucun résultat, la valeur est absente au lieu d'etre égale à 0
+* Quand il n'y a aucun résultat, la valeur est absente au lieu d'être égale à 0
