@@ -33,6 +33,7 @@ req.onreadystatechange = function() {
 
 };
 function clickSearchName() {
+
     $("#NameInput").removeClass("has-error");
     $("#NameInput > label").empty();
     var regex = /^[a-zA-Z]+$/;
@@ -48,23 +49,32 @@ function clickSearchName() {
     $("#gareText").show();
     if(String(req.response) != "") {
         var obj = JSON.parse(String(req.response));
-        $("#tableData > tbody").empty();
         var htmlResult = "";
         var now;
-        $("#nbGare").empty().append(obj.length);
-        for (index = 0; index < obj.length; ++index) {
-            now = obj[index];
-            htmlResult += "<tr><td>" + now["nom"] + "</td>";
-            htmlResult += "<td>" + now["commune"] + "</td>";
-            htmlResult += "<td>" + now["cp"] + "</td>";
-            htmlResult += "<td>" + now["dept"] + "</td>";
-            htmlResult += "<td>" + now["region"] + "</td></tr>";
+        dataTable.destroy();
+        $("#tableData > tbody").empty();
+        try{
+
+            $("#nbGare").empty().append(obj.length);
+            for (index = 0; index < obj.length; ++index) {
+                now = obj[index];
+                htmlResult += "<tr><td>" + now["nom"] + "</td>";
+                htmlResult += "<td>" + now["commune"] + "</td>";
+                htmlResult += "<td>" + now["cp"] + "</td>";
+                htmlResult += "<td>" + now["dept"] + "</td>";
+                htmlResult += "<td>" + now["region"] + "</td></tr>";
+            }
+
+            $("#tableData > tbody").append(htmlResult);
         }
-        $("#tableData > tbody").append(htmlResult);
+        catch(err){
+            $("#nbGare").empty().append("0");
+        }
+
     }
     else
         alert("Erreur WebService");
-    dataTable = $('#tableData').DataTable();
+    dataTable = $('#tableData').DataTable({"bDestroy": false});
 }
 function clickSearchCP() {
     $("#CpInput").removeClass("has-error");
@@ -85,19 +95,25 @@ function clickSearchCP() {
 
 
         var obj = JSON.parse(String(req.response));
+        dataTable.destroy();
         $("#tableData > tbody").empty();
         var htmlResult = "";
         var now;
-        $("#nbGare").empty().append(obj.length);
-        for (index = 0; index < obj.length; ++index) {
-            now = obj[index];
-            htmlResult += "<tr><td>" + now["nom"] + "</td>";
-            htmlResult += "<td>" + now["commune"] + "</td>";
-            htmlResult += "<td>" + now["cp"] + "</td>";
-            htmlResult += "<td>" + now["dept"] + "</td>";
-            htmlResult += "<td>" + now["region"] + "</td></tr>";
+        try {
+            $("#nbGare").empty().append(obj.length);
+            for (index = 0; index < obj.length; ++index) {
+                now = obj[index];
+                htmlResult += "<tr><td>" + now["nom"] + "</td>";
+                htmlResult += "<td>" + now["commune"] + "</td>";
+                htmlResult += "<td>" + now["cp"] + "</td>";
+                htmlResult += "<td>" + now["dept"] + "</td>";
+                htmlResult += "<td>" + now["region"] + "</td></tr>";
+            }
+            $("#tableData > tbody").append(htmlResult);
         }
-        $("#tableData > tbody").append(htmlResult);
+        catch (err){
+            $("#nbGare").empty().append("0");
+        }
     }
     else
         alert("Erreur WebService");
@@ -113,19 +129,25 @@ function clickSearchDept() {
 
 
         var obj = JSON.parse(String(req.response));
+        dataTable.destroy();
         $("#tableData > tbody").empty();
         var htmlResult = "";
         var now;
-        $("#nbGare").empty().append(obj.length);
-        for (index = 0; index < obj.length; ++index) {
-            now = obj[index];
-            htmlResult += "<tr><td>" + now["nom"] + "</td>";
-            htmlResult += "<td>" + now["commune"] + "</td>";
-            htmlResult += "<td>" + now["cp"] + "</td>";
-            htmlResult += "<td>" + now["dept"] + "</td>";
-            htmlResult += "<td>" + now["region"] + "</td></tr>";
+        try {
+            $("#nbGare").empty().append(obj.length);
+            for (index = 0; index < obj.length; ++index) {
+                now = obj[index];
+                htmlResult += "<tr><td>" + now["nom"] + "</td>";
+                htmlResult += "<td>" + now["commune"] + "</td>";
+                htmlResult += "<td>" + now["cp"] + "</td>";
+                htmlResult += "<td>" + now["dept"] + "</td>";
+                htmlResult += "<td>" + now["region"] + "</td></tr>";
+            }
+            $("#tableData > tbody").append(htmlResult);
         }
-        $("#tableData > tbody").append(htmlResult);
+        catch (err){
+            $("#nbGare").empty().append("0");
+        }
 
     }
     else
