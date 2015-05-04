@@ -6,7 +6,6 @@ $host= "localhost";
 $dbname = "webapp";
 $user = "root";
 $pwd = "root";
-error_reporting(E_ALL);
 
 function getListDept($query,$pdo){
     if($query==""){
@@ -58,7 +57,6 @@ try {
 
 $typeSearch=$_GET['typeSearch'];
 $query=$_GET['query'];
-
 if($typeSearch==""){
     $result='{"ERREUR":"Aucune query detecté"}';
 }
@@ -79,12 +77,15 @@ else {
             $list = getListCP(htmlspecialchars($query), $pdo);
             $result = json_encode($list, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
             break;
+        case "test":
+            $list = ["test"=>"ok"];
+            $result = json_encode($list, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+            break;
         default:
             $result = '{ "ERREUR" : "Commande inconnue" }';
     }
 }
-//$result=str_replace("[","",$result);
-//$result=str_replace("]","",$result);
+
 if($result=="" || is_null($result)){
     $result="{}";
 }

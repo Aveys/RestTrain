@@ -9,7 +9,7 @@
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-
+SET NAMES 'utf8_general_ci';
 --
 -- Database: `webapp`
 --
@@ -28,7 +28,7 @@ CREATE TABLE `listGare` (
   `region` varchar(27) DEFAULT NULL,
   `dept` varchar(23) DEFAULT NULL,
   `commune` varchar(30) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8_general_ci;
 
 --
 -- Dumping data for table `listGare`

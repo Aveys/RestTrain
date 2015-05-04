@@ -1,5 +1,8 @@
 var baseURL = "http://localhost:8888/ws/";
+var state = "NotConnected";
+
 $("#gareText").hide();
+$("#ConnectedLabel").hide();
 function createRequest() {
     var result = null;
     if (window.XMLHttpRequest) {
@@ -154,6 +157,49 @@ function clickSearchDept() {
         alert("Erreur WebService");
     dataTable = $('#tableData').DataTable();
 }
+function ConnectTest() {
+    try{
+        var req = createRequest();
+        var searchText=$('#UrlWs').val();
+        if(searchText.slice(-1)!='/'){
+            searchText+='/';
+            $('#UrlWs').val(searchText);
+        }
+        req.open("GET",searchText+"test/",false);
+        req.send();
+        if(String(req.response) != "") {
+
+
+            var obj = JSON.parse(String(req.response));
+            var htmlResult = "";
+
+            if(obj["test"]=="ok"){
+                baseURL = searchText;
+                $("#NotConnectedLabel").hide();
+                $("#ConnectedLabel").show();
+                $("#ServerConnect").text(searchText);
+                $("fieldset").prop("disabled",false);
+            }else{
+                $("#ConnectedLabel").hide();
+                $("#NotConnectedLabel").show();
+                $("fieldset").prop("disabled",true);
+                $("#BadConnexion").append("Impossible de se connecter au WebService");
+            }
+        }
+        else{
+            $("#ConnectedLabel").hide();
+            $("#NotConnectedLabel").show();
+            $("fieldset").prop("disabled",true);
+            $("#BadConnexion").append("Impossible de se connecter au WebService");
+        }
+    }
+    catch (err){
+        $("#ConnectedLabel").hide();
+        $("#NotConnectedLabel").show();
+        $("fieldset").prop("disabled",true);
+        $("#BadConnexion").append("Impossible de se connecter au WebService");
+    }
+}
 $("#nameSearchForm").submit(function(event){
     event.preventDefault();
     clickSearchName();
@@ -165,5 +211,10 @@ $("#CPSearchForm").submit(function(event){
 $("#deptSearchForm").submit(function(event){
     event.preventDefault();
     clickSearchDept();
+});
+
+$("#ConnectURL").submit(function(event){
+    event.preventDefault();
+    ConnectTest();
 });
 var dataTable = $('#tableData').DataTable();

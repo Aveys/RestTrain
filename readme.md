@@ -1,7 +1,9 @@
 RestTrain
 ============
 
-creation d'une WebApp RESTful avec un jeu de données de la SNCF (gare de voyageur)
+Creation d'une WebApp RESTful avec un jeu de données de la SNCF (gare de voyageur).
+
+Le code source est aussi disponible sur [Github](https://github.com/Aveys/RestTrain)
 
 Installation
 ------------
@@ -17,7 +19,8 @@ WebService de recherche de gare de voyageurs
 Webservice REST pour lister les gares de voyageurs en France.
 
 * Retour d'une liste de gare en JSON avec ce format :
-  Exemple de retour avec la gare de Lyon Part-Dieu.
+ 
+  _Exemple de retour avec la gare de Lyon Part-Dieu._
   
 ```
 {
@@ -42,6 +45,3 @@ Webservice REST pour lister les gares de voyageurs en France.
 /ws/name/<Nom>
 ```
 
-Bug connus
--------------
-* Quand il n'y a aucun résultat, la valeur est absente au lieu d'être égale à 0
