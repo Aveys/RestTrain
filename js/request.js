@@ -165,6 +165,10 @@ function ConnectTest() {
             searchText+='/';
             $('#UrlWs').val(searchText);
         }
+        if(!(searchText.lastIndexOf("http://", 0) === 0)){
+            searchText= "http://"+searchText;
+            $('#UrlWs').val(searchText);
+        }
         req.open("GET",searchText+"test/",false);
         req.send();
         if(String(req.response) != "") {
@@ -180,6 +184,7 @@ function ConnectTest() {
                 $("#ServerConnect").text(searchText);
                 $("fieldset").prop("disabled",false);
             }else{
+                $("#BadConnexion").empty();
                 $("#ConnectedLabel").hide();
                 $("#NotConnectedLabel").show();
                 $("fieldset").prop("disabled",true);
@@ -187,6 +192,7 @@ function ConnectTest() {
             }
         }
         else{
+            $("#BadConnexion").empty();
             $("#ConnectedLabel").hide();
             $("#NotConnectedLabel").show();
             $("fieldset").prop("disabled",true);
@@ -194,6 +200,7 @@ function ConnectTest() {
         }
     }
     catch (err){
+        $("#BadConnexion").empty();
         $("#ConnectedLabel").hide();
         $("#NotConnectedLabel").show();
         $("fieldset").prop("disabled",true);
