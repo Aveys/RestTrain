@@ -3,6 +3,9 @@ var state = "NotConnected";
 
 $("#gareText").hide();
 $("#ConnectedLabel").hide();
+$("#ErrorName").hide();
+$("#ErrorCP").hide();
+
 function createRequest() {
     var result = null;
     if (window.XMLHttpRequest) {
@@ -36,14 +39,17 @@ req.onreadystatechange = function() {
 
 };
 function clickSearchName() {
-
+    var error=$("#ErrorName");
     $("#NameInput").removeClass("has-error");
-    $("#NameInput > label").empty();
+   error.hide();
     var regex = /^[a-zA-Z]+$/;
     var searchText=$("#textNamesearch").val();
     if(regex.exec(searchText)==null){
+
+        error.empty();
+        error.show();
         $("#NameInput").addClass("has-error");
-        $("#NameInput > label").text("Nom Invalide (A-Z uniquement)");
+        error.text("Nom Invalide (A-Z uniquement)");
         return null;
     }
     var req = createRequest();
@@ -80,13 +86,17 @@ function clickSearchName() {
     dataTable = $('#tableData').DataTable({"bDestroy": false});
 }
 function clickSearchCP() {
+    var error =$("#ErrorCP");
     $("#CpInput").removeClass("has-error");
-    $("#CpInput > label").empty();
+    error.hide();
     var regex = /^\d{5}$/;
     var searchText=$("#textCPSearch").val();
     if(regex.exec(searchText)==null){
+
+        error.empty();
+        error.show();
         $("#CpInput").addClass("has-error");
-        $("#CpInput > label").text("Code Postal Invalide");
+        error.text("Code Postal Invalide");
         return null;
     }
 
